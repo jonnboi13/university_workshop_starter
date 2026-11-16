@@ -1,0 +1,132 @@
+sources:
+  - name: jaffle_shop
+    description: "Raw Jaffle Shop seed data loaded into BigQuery."
+    database: speedy-triode-514501-p1
+    schema: dbt_oliphant_jaffle_raw
+    tables:
+      - name: raw_customers
+        description: "One row per customer."
+        columns:
+          - name: id
+            data_type: string
+            description: "Unique identifier for the customer."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            data_type: string
+            description: "Customer name."
+
+      - name: raw_items
+        description: "Line items belonging to customer orders."
+        columns:
+          - name: id
+            data_type: string
+            description: "Unique identifier for the order item."
+            tests:
+              - not_null
+              - unique
+          - name: order_id
+            data_type: string
+            description: "Identifier of the order containing the item."
+          - name: sku
+            data_type: string
+            description: "SKU of the product purchased."
+
+      - name: raw_orders
+        description: "One row per customer order."
+        columns:
+          - name: id
+            data_type: string
+            description: "Unique identifier for the order."
+            tests:
+              - not_null
+              - unique
+          - name: customer
+            data_type: string
+            description: "Identifier of the customer who placed the order."
+          - name: ordered_at
+            data_type: datetime
+            description: "Timestamp when the order was placed."
+          - name: store_id
+            data_type: string
+            description: "Identifier of the store associated with the order."
+          - name: subtotal
+            data_type: int64
+            description: "Order subtotal before tax."
+          - name: tax_paid
+            data_type: int64
+            description: "Tax charged on the order."
+          - name: order_total
+            data_type: int64
+            description: "Total order amount after tax."
+
+      - name: raw_products
+        description: "Product catalog records."
+        columns:
+          - name: sku
+            data_type: string
+            description: "Unique stock-keeping unit for the product."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            data_type: string
+            description: "Product name."
+          - name: type
+            data_type: string
+            description: "Product category or type."
+          - name: price
+            data_type: int64
+            description: "Product price."
+          - name: description
+            data_type: string
+            description: "Longer description of the product."
+
+      - name: raw_stores
+        description: "Store locations where orders are placed."
+        columns:
+          - name: id
+            data_type: string
+            description: "Unique identifier for the store."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            data_type: string
+            description: "Store name."
+          - name: opened_at
+            data_type: datetime
+            description: "Timestamp when the store opened."
+          - name: tax_rate
+            data_type: float64
+            description: "Tax rate applied by the store."
+
+      - name: raw_supplies
+        description: "Supply records associated with product SKUs."
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments:
+                combination_of_columns:
+                  - id
+                  - sku
+        columns:
+          - name: id
+            data_type: string
+            description: "Supply identifier; unique together with sku."
+            tests:
+              - not_null
+          - name: name
+            data_type: string
+            description: "Supply name."
+          - name: cost
+            data_type: int64
+            description: "Cost of the supply."
+          - name: perishable
+            data_type: boolean
+            description: "Whether the supply is perishable."
+          - name: sku
+            data_type: string
+            description: "Product SKU associated with the supply."
+            tests:
+              - not_null

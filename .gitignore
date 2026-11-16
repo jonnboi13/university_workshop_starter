@@ -1,8 +1,10 @@
 target/
 dbt_packages/
 logs/
+.presentation_build/
 dbt_modules/
 profiles.yml
 .DS_Store
+.~lock.*#
 .vscode/
 dbt_internal_packages/

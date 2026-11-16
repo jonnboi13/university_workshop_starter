@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_customer_orders
+    description: "Intermediate model combining customers with their orders."
+
+  - name: int_item_finance
+    description: "Intermediate model calculating financial measures for order items."
+
+  - name: int_sales_enriched
+    description: "Intermediate model combining sales records with the customer, item, and product context needed for reporting."
