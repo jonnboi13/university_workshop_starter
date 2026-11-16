@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Calendar dimension with one row per date represented in the order history."
+    columns:
+      - name: date_day
+        description: "Calendar date and primary key for the date dimension."
+        tests:
+          - not_null
+          - unique
+      - name: date_key
+        description: "Integer date key formatted as YYYYMMDD."
+        tests:
+          - not_null
+          - unique
+      - name: day_name
+        description: "Full name of the day, such as Monday."
+      - name: day_of_week
+        description: "Day-of-week number returned by BigQuery, where Sunday is 1 and Saturday is 7."
+      - name: week_of_year
+        description: "ISO week number for the date."
+      - name: week_start_date
+        description: "Monday that begins the date's week."
+      - name: month_number
+        description: "Numeric month from 1 through 12."
+      - name: month_name
+        description: "Full name of the month, such as January."
+      - name: quarter_number
+        description: "Quarter of the year from 1 through 4."
+      - name: year
+        description: "Four-digit calendar year."
+      - name: is_weekend
+        description: "Whether the date falls on Saturday or Sunday."
+
+  - name: dim_customer
+    description: "Customer dimension with one row per customer."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for the customer."
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: "Customer name."
+
+  - name: dim_product
+    description: "Product dimension with one row per product."
+    columns:
+      - name: sku
+        description: "Unique identifier for the product."
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Product name."
+      - name: product_type
+        description: "Product type."
+      - name: product_price
+        description: "Product price in dollars."
+      - name: product_description
+        description: "Description of the product."
+
+  - name: dim_store
+    description: "Store dimension with one row per store."
+    columns:
+      - name: store_id
+        description: "Unique identifier for the store."
+        tests:
+          - not_null
+          - unique
+      - name: store_name
+        description: "Store name."
+      - name: opened_date
+        description: "Date when the store opened."
+      - name: tax_rate
+        description: "Tax rate applied by the store."

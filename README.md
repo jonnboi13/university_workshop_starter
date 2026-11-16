@@ -53,6 +53,18 @@ Customer segments are defined by order count:
 
 The project includes `not_null` and `unique` tests for primary keys, source-key tests, composite uniqueness testing for supplies, and relationship tests connecting orders to customers and stores.
 
-## Presentation
+## Presentations
+
+This repository includes two short presentations. Each one answers a different business question using a different reporting mart.
+
+### 1. Customer segments — who should we retain or grow?
 
 [View the customer-segment presentation](presentation/customer_segments_presentation.pptx)
+
+This presentation uses `mart_customer_segments` to compare one-time, returning, and loyal customers. It focuses on customer count, order frequency, average order value, revenue, and gross margin to identify retention and upsell opportunities.
+
+### 2. Margin by time — when are the most profitable times to sell?
+
+[View the margin-by-time presentation](presentation/margin_by_time_presentation.pptx)
+
+This presentation uses `mart_margin_by_time` to compare morning, afternoon, and evening performance across weekdays and weekends. It focuses on orders per day, revenue per day, cost per day, and gross margin per day to support a targeted weekend-afternoon promotion or similar experiment.

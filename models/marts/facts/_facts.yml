@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "Fact table with one row per order."
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Identifier of the customer who placed the order."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: store_id
+        description: "Identifier of the store associated with the order."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: ordered_at
+        description: "Timestamp when the order was placed."
+      - name: ordered_date
+        description: "Calendar date when the order was placed."
+      - name: item_count
+        description: "Number of items in the order."
+      - name: revenue
+        description: "Total selling revenue from the items in the order."
+      - name: cost
+        description: "Total supply cost for the items in the order."
+      - name: gross_margin
+        description: "Order revenue minus total supply cost."
+      - name: gross_margin_percent
+        description: "Gross margin as a percentage of order revenue, returned on a 0 to 100 scale."
+      - name: order_subtotal
+        description: "Order subtotal before tax."
+      - name: order_tax_paid
+        description: "Tax charged on the order."
+      - name: order_total
+        description: "Total order amount after tax."
